@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¡Revelación de Género - Belkis & Martín!</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF6B00;
+    --gold: #FFD700;
+    --blue: #4FC3F7;
+    --pink: #F48FB1;
+    --dark: #1a1a2e;
+    --white: #fff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #87CEEB 0%, #E0F7FA 40%, #FCE4EC 70%, #FFF8E1 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Floating clouds */
+  .cloud {
+    position: fixed;
+    border-radius: 50%;
+    opacity: 0.55;
+    filter: blur(2px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .cloud-blue { background: radial-gradient(circle, #90CAF9, #64B5F6); }
+  .cloud-pink { background: radial-gradient(circle, #F8BBD0, #F48FB1); }
+  .c1 { width: 180px; height: 90px; top: 2%; left: -3%; animation: floatCloud 12s ease-in-out infinite; }
+  .c2 { width: 130px; height: 65px; top: 5%; right: -2%; animation: floatCloud 15s ease-in-out infinite reverse; }
+  .c3 { width: 160px; height: 80px; top: 30%; left: -4%; animation: floatCloud 18s ease-in-out infinite 3s; }
+  .c4 { width: 120px; height: 60px; top: 55%; right: -3%; animation: floatCloud 13s ease-in-out infinite 2s; }
+  .c5 { width: 200px; height: 100px; bottom: 10%; left: 5%; animation: floatCloud 16s ease-in-out infinite 1s; }
+  .c6 { width: 140px; height: 70px; bottom: 5%; right: 2%; animation: floatCloud 14s ease-in-out infinite 4s; }
+
+  @keyframes floatCloud {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    33% { transform: translateX(15px) translateY(-8px); }
+    66% { transform: translateX(-10px) translateY(5px); }
+  }
+
+  /* Dragon balls floating */
+  .dragonball {
+    position: fixed;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #FFE082, #FF8F00 60%, #E65100);
+    box-shadow: 0 0 15px rgba(255,140,0,0.6), inset 0 -5px 10px rgba(0,0,0,0.2);
+    z-index: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .dragonball::after {
+    content: '★';
+    color: #c62828;
+    font-size: 14px;
+    text-shadow: 0 0 4px rgba(0,0,0,0.3);
+  }
+  .db1 { top: 18%; left: 3%; animation: floatDB 8s ease-in-out infinite; }
+  .db2 { top: 42%; right: 4%; animation: floatDB 10s ease-in-out infinite 2s; }
+  .db3 { top: 65%; left: 5%; animation: floatDB 9s ease-in-out infinite 1s; }
+  .db4 { bottom: 20%; right: 6%; animation: floatDB 11s ease-in-out infinite 3s; }
+
+  @keyframes floatDB {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(15deg); }
+  }
+
+  /* Main container */
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 30px 10px 20px;
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .header h1 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2.4rem, 10vw, 3.5rem);
+    color: var(--orange);
+    text-shadow:
+      3px 3px 0 #000,
+      -2px -2px 0 #000,
+      2px -2px 0 #000,
+      -2px 2px 0 #000,
+      0 4px 8px rgba(0,0,0,0.3);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+
+  /* Card sections */
+  .card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 24px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
+    border: 2px solid rgba(255,255,255,0.9);
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.2s; }
+  .card:nth-child(4) { animation-delay: 0.3s; }
+  .card:nth-child(5) { animation-delay: 0.4s; }
+  .card:nth-child(6) { animation-delay: 0.5s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Greeting */
+  .greeting {
+    text-align: center;
+  }
+  .greeting .saludo {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 4px;
+  }
+  .greeting .nombres {
+    font-family: 'Bangers', cursive;
+    font-size: 2rem;
+    color: var(--orange);
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+    letter-spacing: 1px;
+  }
+  .greeting .mensaje {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.7;
+    margin-top: 14px;
+    text-align: center;
+  }
+  .greeting .averigua {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--orange);
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  /* Teams */
+  .teams-title {
+    font-family: 'Bangers', cursive;
+    font-size: 1.6rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  .teams {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .team {
+    border-radius: 18px;
+    padding: 16px 10px;
+    text-align: center;
+  }
+  .team-nino {
+    background: linear-gradient(135deg, #90CAF9, #42A5F5);
+    color: white;
+  }
+  .team-nina {
+    background: linear-gradient(135deg, #F8BBD0, #F06292);
+    color: white;
+  }
+  .team-icon { font-size: 2.2rem; margin-bottom: 6px; }
+  .team-label {
+    font-family: 'Bangers', cursive;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .team-gift {
+    font-size: 0.9rem;
+    font-weight: 700;
+    opacity: 0.95;
+  }
+
+  /* Dress code */
+  .vestimenta-title {
+    font-family: 'Bangers', cursive;
+    font-size: 1.6rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  .vest-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .vest-item {
+    border-radius: 14px;
+    padding: 14px 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .vest-azul {
+    background: linear-gradient(135deg, #BBDEFB, #64B5F6);
+    color: #0D47A1;
+    border: 2px solid #42A5F5;
+  }
+  .vest-rosa {
+    background: linear-gradient(135deg, #FCE4EC, #F48FB1);
+    color: #880E4F;
+    border: 2px solid #F06292;
+  }
+  .vest-icon { font-size: 1.8rem; margin-bottom: 6px; }
+
+  /* Date & time */
+  .datetime {
+    text-align: center;
+  }
+  .dt-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .dt-icon { font-size: 2rem; }
+  .dt-text {
+    font-family: 'Bangers', cursive;
+    font-size: 1.6rem;
+    color: #333;
+    letter-spacing: 1px;
+  }
+  .dt-sub {
+    font-size: 0.85rem;
+    color: #777;
+    font-weight: 600;
+  }
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--blue), var(--pink));
+    border-radius: 99px;
+    margin: 14px auto;
+  }
+
+  /* Location */
+  .location {
+    text-align: center;
+  }
+  .location-icon { font-size: 2rem; margin-bottom: 8px; }
+  .location-title {
+    font-family: 'Bangers', cursive;
+    font-size: 1.5rem;
+    color: #333;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .location-address {
+    font-size: 1.05rem;
+    color: #555;
+    font-weight: 700;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 10px 0 6px;
+    font-size: 0.85rem;
+    color: #999;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    animation: fadeUp 0.6s ease 0.7s both;
+  }
+
+  /* Goku decoration */
+  .goku-emoji {
+    font-size: 3rem;
+    display: block;
+    text-align: center;
+    margin-bottom: 8px;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Stars decoration */
+  .stars {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 10px 0;
+    font-size: 1.2rem;
+  }
+  .star { animation: twinkle 1.5s ease-in-out infinite; }
+  .star:nth-child(2) { animation-delay: 0.2s; }
+  .star:nth-child(3) { animation-delay: 0.4s; }
+  .star:nth-child(4) { animation-delay: 0.6s; }
+  .star:nth-child(5) { animation-delay: 0.8s; }
+  @keyframes twinkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* Responsive */
+  @media (max-width: 360px) {
+    .header h1 { font-size: 2rem; }
+    .teams, .vest-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background clouds -->
+<div class="cloud cloud-blue c1"></div>
+<div class="cloud cloud-pink c2"></div>
+<div class="cloud cloud-blue c3"></div>
+<div class="cloud cloud-pink c4"></div>
+<div class="cloud cloud-pink c5"></div>
+<div class="cloud cloud-blue c6"></div>
+
+<!-- Dragon balls -->
+<div class="dragonball db1"></div>
+<div class="dragonball db2"></div>
+<div class="dragonball db3"></div>
+<div class="dragonball db4"></div>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <span class="goku-emoji">🐉</span>
+    <h1>¡La Revelación<br>de Mi Género!</h1>
+    <div class="stars">
+      <span class="star">⭐</span>
+      <span class="star">⭐</span>
+      <span class="star">⭐</span>
+      <span class="star">⭐</span>
+      <span class="star">⭐</span>
+    </div>
+  </div>
+
+  <!-- Greeting -->
+  <div class="card greeting">
+    <p class="saludo">Hola, Familia y Amigos</p>
+    <p class="nombres">Belkis & Martín</p>
+    <p class="mensaje">
+      Estamos muy felices de anunciar que pronto tendremos un nuevo integrante en nuestra familia. Únete a nosotros y acompáñanos a la fiesta de revelación de género de nuestro bebé 💕
+    </p>
+    <p class="averigua">✨ Averígualo con nosotros ✨</p>
+  </div>
+
+  <!-- Teams gift -->
+  <div class="card">
+    <p class="teams-title">⚡ ¡Elige tu equipo! ⚡</p>
+    <div class="teams">
+      <div class="team team-nino">
+        <div class="team-icon">👦</div>
+        <div class="team-label">Team Niño</div>
+        <div class="team-gift">🎁 Pañales</div>
+      </div>
+      <div class="team team-nina">
+        <div class="team-icon">👧</div>
+        <div class="team-label">Team Niña</div>
+        <div class="team-gift">🎁 Toallitas Húmedas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Date & Time -->
+  <div class="card datetime">
+    <div class="dt-row">
+      <span class="dt-icon">📅</span>
+      <div>
+        <div class="dt-text">Sábado 18 de Abril</div>
+        <div class="dt-sub">¡Marca la fecha!</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="dt-row">
+      <span class="dt-icon">⏰</span>
+      <div>
+        <div class="dt-text">5:00 PM</div>
+        <div class="dt-sub">¡No llegues tarde!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Location -->
+  <div class="card location">
+    <div class="location-icon">📍</div>
+    <p class="location-title">Lugar del Evento</p>
+    <p class="location-address">Carrera 19 # 41-47</p>
+  </div>
+
+  <!-- Dress code -->
+  <div class="card">
+    <p class="vestimenta-title">👗 Vestimenta</p>
+    <div class="vest-grid">
+      <div class="vest-item vest-azul">
+        <div class="vest-icon">👕</div>
+        <div>Team Niño</div>
+        <div>Prenda Azul</div>
+      </div>
+      <div class="vest-item vest-rosa">
+        <div class="vest-icon">👚</div>
+        <div>Team Niña</div>
+        <div>Prenda Rosa</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    🐉 Con amor, Belkis & Martín 🐉
+  </div>
+
+</div>
+
+</body>
+</html>
